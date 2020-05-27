@@ -1,5 +1,6 @@
-width = 375;
-height = 500;
+width = window.screen.width;
+height = window.screen.height;
+
 var config = {
     type: Phaser.AUTO,
     width: width,
@@ -40,18 +41,20 @@ function create() {
     this.input.on('pointerdown', function () {
         moveup = true;
     }, this);
+
     // this.add.image(0, 0, 'bg');
     this.bg = this.add.tileSprite(0, -60, 768, 892, 'bg');
+
     this.bg.setOrigin(0)
-    this.bg.scale = 0.6;
-    this.ground = this.add.tileSprite(0, 460, 1000, 100, 'ground');
+    this.bg.scale = height/892;
+    this.ground = this.add.tileSprite(0, height-60, width*2, height, 'ground');
     this.ground.setOrigin(0)
     this.ground.scale = 0.5;
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
     const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
     const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
-    gameoverText = this.add.text(screenCenterX, screenCenterY, '', { fontSize: '64px', fill: '#000', boundsAlignH: "center", boundsAlignV: "middle" }).setOrigin(0.5);
+    gameoverText = this.add.text(screenCenterX, screenCenterY, '', { fontSize: '48px', fill: '#000', boundsAlignH: "center", boundsAlignV: "middle" }).setOrigin(0.5);
 
 
     player = this.physics.add.sprite(100, 100, 'bird');
